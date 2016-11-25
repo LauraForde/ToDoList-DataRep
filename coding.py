@@ -1,9 +1,8 @@
-from flask import Flask
-app = Flask(__name__)
+# Importing couchdb
+import couchdb
 
-@app.route("/")
-def hello();
-    return "Hello World!"
+# Setting up server
+couch = couchdb.Server('http://127.0.0.1:5984/')
 
-if __name__ == "__main__":
-        app.run()
+# Creating database called list
+db = couch.create('list')
