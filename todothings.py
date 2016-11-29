@@ -18,18 +18,17 @@ def root():
 
 @app.route("/add", methods = ["GET", "POST"])
 def addAList():
-    listName = flsk.request.values["listName"]
     item1 = flsk.request.values["item1"]
     item2 = flsk.request.values["item2"]
     item3 = flsk.request.values["item3"]
     
-db = sqlite3.connect('lists.db')
-c = db.cursor()
+    db = sqlite3.connect('lists.db')
+    c = db.cursor()
 
-c.execute("INSERT INTO list VALUES(?, ?, ?, ?)",(listName, item1, item2, item3))
+    c.execute("INSERT INTO list VALUES(?, ?, ?, ?)",(listName, item1, item2, item3))
 
-db.commit()
-db.close()
+    db.commit()
+    db.close()
 
 
 if __name__ == "__main__":
