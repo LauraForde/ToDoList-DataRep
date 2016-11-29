@@ -48,28 +48,28 @@
           </button>
           <a class="navbar-brand" href="#">To Do List</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#add">Add</a></li>
-            <li><a href="#delete">Delete</a></li>
-            </ul>   
-        </div><!--/.nav-collapse -->
+
       </div>
     </nav>
 
+    <!-- http://www.w3schools.com/bootstrap/bootstrap_forms.asp -->
     <div class="container">
-
-      <div class="starter-template">
-        <h1>All Lists</h1>
         <form>
-            Add A List:<br/>
-            <input type = "text" name = "listName" placeholder="E.g. Shopping"><br/>
-            Add Items To List:<br/>
-            <input type = "text" name = "item" placeholder="E.g. Veg"><br/><br/>
-            <input type = "submit" value = "Enter">
-        </form> 
-      </div>
+            <div class = "form-group">
+                <h1>Saved Lists:</h1>
+                <textarea class = "form-control" name = "savedLists" id = "savedLists" placeholder = "There are no saved lists" readonly></textarea>
+            </div>
+            <div class = "form-group">
+                <h1>Add A List</h1>
+                <br/>
+                <label for = "addName">List Name:</label>
+                <input type = "text" class = "form-control" id = "listName" placeholder = "Shopping">
+                <br/>
+                <label for = "addItems">List Items:</label>
+                <textarea class = "form-control" name = "addItems" id = "addItems" placeholder = "Bleach, spuds, ice-cream"></textarea>
+            </div>
+            <button type = "submit" class = "btn btn-default">Enter List</button>
+        </form>
 
     </div><!-- /.container -->
 

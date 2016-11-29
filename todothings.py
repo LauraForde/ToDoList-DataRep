@@ -28,17 +28,17 @@ def addAList():
     c.execute("INSERT INTO list VALUES(?, ?, ?, ?)",(listName, item1, item2, item3))
 
     db.commit()
-    db.close()
+    db.close()        
     
 @app.teardown_appcontext
 def close_connection(execption):
-    db = getattr(fl.g, '_database', None)
+    db = getattr(flsk.g, '_database', None)
     if db is not None:
         db.close()
         
-@app.route("/")
-def hello():
-    c = get_db().cursor()
+@app.route("/saved", methods = ["GET", "POST"])
+def saved():
+    
     c.execute("SELECT listName FROM list")
     return str(c.fectall())
         
