@@ -10,8 +10,10 @@ def setup_db():
     db.commit()
 
 
-    c.execute("INSERT INTO list(listName, item1, item2, item3) VALUES ('Dinner', 'Carrots', 'Steak', 'Spuds')")
-    db.commit()
+    c.execute("SELECT COUNT(*) FROM list")
+    if c.fetchall()[0][0] == 0:
+        c.execute('INSERT INTO list(listName, item1, item2, item3) VALUES("Shopping", "Eggs", "Bread", "Vodka")')
+        db.commit()
 
 
     db.close()

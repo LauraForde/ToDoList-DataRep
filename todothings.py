@@ -6,10 +6,10 @@ DATABASE = 'lists.db'
 app = flsk.Flask(__name__)
 
 #http://flask.pocoo.org/docs/0.11/patterns/sqlite3/
-def loadDB():
-    db = getattr(flsk, '_database', None)
+def get_db():
+    db = getattr(flsk.g, '_database', None)
     if db is None:
-        db = flsk._database = sqlite3.connect(DATABASE)
+        db = flsk.g._database = sqlite3.connect(DATABASE)
     return db    
 
 @app.route("/")
@@ -29,8 +29,19 @@ def addAList():
 
     db.commit()
     db.close()
-
-
+    
+@app.teardown_appcontext
+def close_connection(execption):
+    db = getattr(fl.g, '_database', None)
+    if db is not None:
+        db.close()
+        
+@app.route("/")
+def hello():
+    c = get_db().cursor()
+    c.execute("SELECT listName FROM list")
+    return str(c.fectall())
+        
 if __name__ == "__main__":
     app.run()
     
