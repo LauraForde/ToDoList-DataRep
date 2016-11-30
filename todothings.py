@@ -2,11 +2,13 @@ import flask as flsk
 import sqlite3
 
 DATABASE = 'lists.db'
+connDB = sqlite3.connect(DATABASE)
+c = connDB.cursor()
 
 app = flsk.Flask(__name__)
 
 #http://flask.pocoo.org/docs/0.11/patterns/sqlite3/
-def get_db():
+def set_up():
     db = getattr(flsk.g, '_database', None)
     if db is None:
         db = flsk.g._database = sqlite3.connect(DATABASE)
@@ -14,33 +16,27 @@ def get_db():
 
 @app.route("/")
 def root():
+    c = set_up().cursor()
     return app.send_static_file('webapp.html')    
 
-@app.route("/add", methods = ["GET", "POST"])
-def addAList():
-    item1 = flsk.request.values["item1"]
-    item2 = flsk.request.values["item2"]
-    item3 = flsk.request.values["item3"]
-    
-    db = sqlite3.connect('lists.db')
-    c = db.cursor()
+@app.route("/addList", methods = ["GET", "POST"])
+def addList():
+    c.execute("INSERT INTO lists VALUES(?, ?, ?, ?)",(flsk.request.form['listName'], flsk.request.form['item1'], flsk.request.form['item2'], flsk.request.form['item3']))
 
-    c.execute("INSERT INTO list VALUES(?, ?, ?, ?)",(listName, item1, item2, item3))
-
-    db.commit()
-    db.close()        
+    connDB.commit()
+    return str(c.fetchall())       
+        
+@app.route("/saved", methods = ["GET", "POST"])
+def saved():
     
+    c.execute("SELECT * FROM list")
+    return str(c.fectall())
+
 @app.teardown_appcontext
 def close_connection(execption):
     db = getattr(flsk.g, '_database', None)
     if db is not None:
         db.close()
-        
-@app.route("/saved", methods = ["GET", "POST"])
-def saved():
-    
-    c.execute("SELECT listName FROM list")
-    return str(c.fectall())
         
 if __name__ == "__main__":
     app.run()

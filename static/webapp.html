@@ -54,10 +54,10 @@
 
     <!-- http://www.w3schools.com/bootstrap/bootstrap_forms.asp -->
     <div class="container">
-        <form>
+        <form action = "/saved" method = "post">
             <div class = "form-group">
                 <h1>Saved Lists:</h1>
-                <textarea class = "form-control" name = "savedLists" id = "savedLists" placeholder = "There are no saved lists" readonly></textarea>
+                <textarea class = "form-control" rows = "10" name = "savedLists" id = "savedLists" placeholder = "There are no saved lists" readonly></textarea>
             </div>
             <div class = "form-group">
                 <h1>Add A List</h1>
@@ -68,7 +68,7 @@
                 <label for = "addItems">List Items:</label>
                 <textarea class = "form-control" name = "addItems" id = "addItems" placeholder = "Bleach, spuds, ice-cream"></textarea>
             </div>
-            <button type = "submit" class = "btn btn-default">Enter List</button>
+            <button type = "submit" class = "btn btn-default" id = "submit">Enter List</button>
         </form>
 
     </div><!-- /.container -->
@@ -82,5 +82,25 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+    <script>
+        $("#submit").click(function(e){
+            e.preventDefault();
+            
+            data = {
+                listName: $("#listName").val(),
+                item1: $("#item1").val(),
+                item2: $("item2").val(),
+                item3: $("item3").val()         
+            }
+            
+            $.post("/addList", data, function(resbody){
+                $("#serverouput").text(resbody);
+            });
+        });
+            
+
+    </script>
+      
   </body>
 </html>
