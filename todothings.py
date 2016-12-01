@@ -22,9 +22,9 @@ def get_db():
 
 
 @app.route("/add", methods = ["GET", "POST"])
-def addList():
+def add():
 
-    c.execute('INSERT INTO lists(listName, items) VALUES(?, ?)',(flsk.request.form['listName'], flsk.request.form['items'],))
+    c.execute('INSERT INTO list(listName, items) VALUES(?, ?)',(flsk.request.form['listName'], flsk.request.form['items'],))
 
     connDB.commit()
     return str(c.fetchall())       
