@@ -1,27 +1,30 @@
 import flask as flsk
+from flask import render_template, request
 import sqlite3
+
+app = flsk.Flask(__name__)
 
 DATABASE = 'lists.db'
 connDB = sqlite3.connect(DATABASE)
 c = connDB.cursor()
 
-app = flsk.Flask(__name__)
-
-#http://flask.pocoo.org/docs/0.11/patterns/sqlite3/
-def set_up():
-    db = getattr(flsk.g, '_database', None)
-    if db is None:
-        db = flsk.g._database = sqlite3.connect(DATABASE)
-    return db    
-
 @app.route("/")
-def root():
-    c = set_up().cursor()
+def route():
     return app.send_static_file('webapp.html')    
 
-@app.route("/addList", methods = ["GET", "POST"])
+#http://flask.pocoo.org/docs/0.11/patterns/sqlite3/
+def get_db():
+    db = getattr(flsk.g, '_database', None)
+    if db is None:
+        db = flsk.g._database = sqlite3.connect('lists.db')
+    return db 
+
+
+
+@app.route("/add", methods = ["GET", "POST"])
 def addList():
-    c.execute("INSERT INTO lists VALUES(?, ?, ?, ?)",(flsk.request.form['listName'], flsk.request.form['item1'], flsk.request.form['item2'], flsk.request.form['item3']))
+
+    c.execute('INSERT INTO lists(listName, items) VALUES(?, ?)',(flsk.request.form['listName'], flsk.request.form['items'],))
 
     connDB.commit()
     return str(c.fetchall())       
@@ -32,12 +35,6 @@ def saved():
     c.execute("SELECT * FROM list")
     return str(c.fectall())
 
-@app.teardown_appcontext
-def close_connection(execption):
-    db = getattr(flsk.g, '_database', None)
-    if db is not None:
-        db.close()
-        
 if __name__ == "__main__":
     app.run()
     
