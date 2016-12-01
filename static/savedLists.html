@@ -1,0 +1,27 @@
+<!--- Used the following tutorials and docs as examples
+
+    https://www.youtube.com/watch?v=8aTgOs_cv2g&list=PLQVvvaa0QuDc_owjTbIY4rbgXOFkUYOUB&index=3
+    https://www.youtube.com/watch?v=OuDOr32ZHE0
+    https://www.youtube.com/watch?v=VSzNYfDQp8Y
+    http://jinja.pocoo.org/docs/dev/templates/
+    http://jinja.pocoo.org/docs/dev/
+
+-->
+
+{ % extends "webapp.html" % }
+{ % block title % } To Do List { % endblock % }
+{ % block head % } {{super()}} { % endblock % }
+{ % block content % }
+
+    <h1>Saved Lists:</h1>
+    <div class = "container">
+    <ul>
+
+        { % for output in serveroutput % }
+            <li>
+                {{output}}
+            </li>
+        { % endfor % }
+    </ul>
+</div>
+{ % endblock % }

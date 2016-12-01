@@ -57,7 +57,10 @@
         <form action = "/saved" method = "post">
             <div class = "form-group">
                 <h1>Saved Lists:</h1>
-                <textarea class = "form-control" rows = "10" name = "savedLists" id = "savedLists" placeholder = "There are no saved lists" readonly></textarea>
+                <textarea class = "form-control" rows = "10" name = "savedLists" id = "savedLists" placeholder = "There are no saved lists" readonly>
+                
+                
+                </textarea>
             </div>
         </form>
         <form actions = "/add" method = "post">
@@ -97,7 +100,8 @@
             $.post("/add", newList, function(resbody){
                 $("#serverouput").text(resbody);
             });
-        });            
+            location.reload()
+        });
 
     </script>
       

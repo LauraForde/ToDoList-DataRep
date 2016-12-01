@@ -1,1 +1,14 @@
-"# ToDoList-DataRep" 
+"# ToDoList-DataRep Author: Laura Forde" 
+
+To Run The Program
+
+To run this program you will need to have python, flask and SQLite on your PC. Both flask and SQLite come with python so just have the latest version installed. To get the app running, first run the creatingDatabase.py file after moving to the project file in your command line, this will do as the name suggests and creating a 'lists' database to be used. You do this by simply typing “python creatingDatabase.py” into your command line. Then to get the main part of the project up and running you do the same for the todothings.py file as you did for the creatingDatabase.py file, “python todothings.py”. Then you need to go to your browser of preference, mine was chrome, and go to http://127.0.0.1:5000 as the command prompt will tell you that’s where the project will be run. Now you can use the project to add lists to a database.
+
+Why Python, Flask?
+I chose to use python for this project as we are learning it as part of a module in my software development course. Python is easy to use, understand and learn. Python is widely used as it offers a lot as flask comes as part of the python framework. For what I wanted to achieve in this project, python had everything I needed in one framework. When I first started my project I want to use CouchDB, while it was nice to use, it was hard to use with python and the web page and I struggled to find any easy to follow documentation online. I firstly wanted to use couch as we were also learning this in the module that I must make this project for. I done some research and found out the SQLite was also part of this framework. I found lots of easy to follow documentation online and decided to make the change to SQLite as I felt I would be able to achieve better things than with couch.
+
+What I wanted to achieve?
+What I wanted this web application to achieve was that a user would use it simply for its name, a to do list. I wanted the user to be able to enter the name of their list, e.g. “college work” and then add things to this list, e.g. “data rep project”, “rad exam” and then be able to mark the elements on the list off as they were completed. I want all the saved lists to be printed out in the textarea at the top of the page with all the elements of the list showing alongside the name. I want the user to be able to go through all the saved lists and delete them as the elements are all completed or edit them to delete the completed elements and add new ones. Unfortunately I haven’t been able to achieve this before the project deadline but I hope to eventually achieve this. This module, Data Representation and Querying, has really interested me from the start but would not be my strong suit as I find it hard working with web design.
+
+Bootstrap 
+The template I edited was the starter template on the bootstrap sight. Bootstrap gives you the basic html template you will need for any type of website you may want to create. In the CDN section they always have the latest javascript and css files that you will need to fully create the website you wish.
